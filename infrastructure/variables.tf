@@ -17,7 +17,7 @@ variable "aws_profile" {
 
 variable "repo_name" {
   description = "The name of the ecr repository"
-  default     = "speed"
+  default     = "video-stream-monitoring"
 }
 
 
@@ -33,7 +33,7 @@ variable "az_count" {
 
 variable "app_image" {
   description = "Docker image to run in the ECS cluster"
-  default     = "nginx:latest"
+  default     = "843746227026.dkr.ecr.af-south-1.amazonaws.com/video-stream-monitoring:latest"
 }
 
 variable "app_port" {
