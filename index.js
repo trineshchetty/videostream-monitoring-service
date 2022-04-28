@@ -4,7 +4,6 @@ const compression = require("compression")
 
 
 
-const app = express()
 
 
 app.use(cors())
@@ -14,6 +13,7 @@ app.use(express.json())
 
 
 app.get("/", (req, res) => res.send("OK").status(200))
+app.use("/api/v1", require("./routes/index"))
 
 const PORT = 3000
 app.listen(PORT, () => {
