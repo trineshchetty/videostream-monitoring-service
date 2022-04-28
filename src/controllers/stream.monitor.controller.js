@@ -6,6 +6,7 @@ module.exports = function (service)
     {
         try
         {
+            res.send("getstreams")
         }
         catch(error)
         {
