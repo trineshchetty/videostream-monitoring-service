@@ -1,6 +1,6 @@
 [
   {
-    "name": "video-stream-monitoring-app",
+    "name": "myVideoStreamMonitoringApp",
     "image": "${app_image}",
     "cpu": ${fargate_cpu},
     "memory": ${fargate_memory},

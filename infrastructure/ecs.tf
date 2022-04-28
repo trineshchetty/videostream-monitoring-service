@@ -4,7 +4,7 @@ resource "aws_ecs_cluster" "main" {
   name = "stream-app-cluster"
 }
 
-data "template_file" "myapp" {
+data "template_file" "myVideoStreamMonitoringApp" {
   template = file("./templates/ecs/ecs-conf.json.tpl")
 
   vars = {
@@ -23,7 +23,7 @@ resource "aws_ecs_task_definition" "app" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
   memory                   = var.fargate_memory
-  container_definitions    = data.template_file.myapp.rendered
+  container_definitions    = data.template_file.myVideoStreamMonitoringApp.rendered
 }
 
 resource "aws_ecs_service" "main" {
@@ -41,7 +41,7 @@ resource "aws_ecs_service" "main" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.app.id
-    container_name   = "stream-app"
+    container_name   = "myVideoStreamMonitoringApp"
     container_port   = var.app_port
   }
 
