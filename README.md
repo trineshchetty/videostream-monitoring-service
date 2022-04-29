@@ -62,7 +62,7 @@ Do note that the e2e.spec.js script is a supertest and thus will create new reco
 - DynamoDb Local (https://www.serverless.com/plugins/serverless-dynamodb-local)
     - Serverless Dynamodb Local Plugin - Allows to run dynamodb locally for serverless
 
-- Implement a solution whereby, depending on the environment you are in, create a new table with a staging prefix.
+- Implement a solution whereby, depending on the environment you are in, create a new table with a environment prefix.
 
 - Create a new aws account with AWS Organizations, thus separating your development, testing and production accounts. (reliable)
 
@@ -94,13 +94,13 @@ Everytime we push a change, github actions will build and push a new image versi
 
 ## Scalabiliity Strategy:
 
-The current architecture makes use of ECS with Fargate sitting behind an Application Load Balancer. The ALB does its health checks to ensure the ecs cluster, service, and tasks are in good shape. We make use of an autoscaling step policy that keeps track of cpu utilization. When the cpo utilization is greater or equal to 85% an alarm will trigger in CloudWatch, this will increase the capacity. As the CPU drops below 10% another CloudWatch Alarm will be triggered, this will scale down the capacity.	
+The current architecture makes use of ECS with Fargate sitting behind an Application Load Balancer. The ALB does its health checks to ensure the ecs cluster, service, and tasks are in good shape. We make use of an autoscaling step policy that keeps track of cpu utilization. When the CPU utilization is greater or equal to 85% an alarm will trigger in CloudWatch, this will increase the capacity. As the CPU drops below 10% another CloudWatch Alarm will be triggered, this will scale down the capacity.	
 
 Another scaling strategy we could have used in target tracking. Where we could have the policy keep track of the average CPU utilization and always ensure that this metric remains relatively the same, also making sure the auto scaling group remains  running in a capacity that is defined by the scaling metric and metric value.
 
 
 Important Aspects of scaling:
-Monitoring the health of your instances, services and tasks is crucial to understanding how your application is responding. Depending on your use case, you could integrate cloudwatch with many external services like slack, email, sms and even whatsapp, through services like sns and aws pinpoint. Another cool feature of AWS is predictive auto scaling which could become useful in predicting how to respond to the environment, by analyzing historical data and scaling to meet demand.
+Monitoring the health of your instances, services and tasks is crucial to understanding how your application is responding. Depending on your use case, you could integrate cloudwatch with many external services like slack, email, sms and even whatsapp, through services like sns and aws pinpoint. Another cool feature of AWS is predictive auto scaling which is useful in predicting how to respond to the environment, by analyzing historical data and scaling to meet demand.
 
 
 
