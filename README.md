@@ -29,6 +29,14 @@ For local development you need to have the following installed:
 ### nodemon
 npm install -g nodemon
 
+### Environment File (.env)
+
+- PORT
+- dev_aws_profile
+- prod_aws_profile
+- DYNAMO_TABLE_NAME
+- HOST
+
 # Next Steps
 
 - Clone repository
@@ -164,11 +172,3 @@ A scheduled scaling policy could be used if we know the demand based on usage pa
 - video_playing
 - video_start_time
 - video_end_time
-
-### Environment File (.env)
-
-- PORT
-- dev_aws_profile
-- prod_aws_profile
-- DYNAMO_TABLE_NAME
-- HOST
