@@ -21,4 +21,4 @@ describe ("main tests for video monitoring service", () => {
 
         expect(videoStreamMonitorService.getStreamsForUserByIp).toBeDefined();
     })
-})
+})  

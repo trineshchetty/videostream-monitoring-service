@@ -16,9 +16,6 @@ module.exports = function streamMonitorService ()
     
             if (process.env.DYNAMO_TABLE_NAME && process.env.DYNAMO_TABLE_NAME !== '')
             {
-
-       
-                
                 const streamsForOriginTarget = await getStreamsForUserByIp(streamData.ip_addr)
 
                 if (streamsForOriginTarget.Count <= 2)
