@@ -94,13 +94,36 @@ Everytime we push a change, github actions will build and push a new image versi
 
 ## Scalabiliity Strategy:
 
-The current architecture makes use of ECS with Fargate sitting behind an Application Load Balancer. The ALB does its health checks to ensure the ecs cluster, service, and tasks are in good shape. We make use of an autoscaling step policy that keeps track of cpu utilization. When the CPU utilization is greater or equal to 85% an alarm will trigger in CloudWatch, this will increase the capacity. As the CPU drops below 10% another CloudWatch Alarm will be triggered, this will scale down the capacity.	
+## Scalabiliity Strategy:
 
-Another scaling strategy we could have used in target tracking. Where we could have the policy keep track of the average CPU utilization and always ensure that this metric remains relatively the same, also making sure the auto scaling group remains  running in a capacity that is defined by the scaling metric and metric value.
+The current architecture makes use of ECS with Fargate sitting behind an Application Load Balancer, with auto scaling policy and deployed to 3 availability zones. The ALB does its health checks to ensure the ecs cluster, service, and tasks are in good shape. We make use of an autoscaling step policy that keeps track of cpu utilization. When the CPU utilization is greater or equal to 85% an alarm will trigger in CloudWatch, this will increase the capacity by 1. As the CPU drops below 10% another CloudWatch Alarm will be triggered, this will scale down the capacity by 1.	
+
+Another scaling strategy we could have used in target tracking. Where we could have the policy keep track of the average CPU utilization and always ensure that this metric remains relatively the same, based on the metric you set.
+
+We could also use capacity provider strategies. Specifically between Fargate and Fargate Spot. Fargate spot would allow us to save on costs, as spot instances are not ideal for resiliency, we could combine it with fargate.
+
+E.g. 
+- Fargate: base=3. Weight: 1
+- Fargate Spot: base=0, weight=2
+
+This ensures 3 tasks are deployed as a minimum to fargate, and thereafter, everytime we get a  new task in fargate, 2 tasks are provisioned to fargate spot.
+
+This will help us maintain high availability and performance.
+
+A scheduled scaling policy could be used if we know the demand based on usage patterns. An example would be an ecommerce website serving customers on Black Friday, or the festive season.
 
 
-Important Aspects of scaling:
-Monitoring the health of your instances, services and tasks is crucial to understanding how your application is responding. Depending on your use case, you could integrate cloudwatch with many external services like slack, email, sms and even whatsapp, through services like sns and aws pinpoint. Another cool feature of AWS is predictive auto scaling which is useful in predicting how to respond to the environment, by analyzing historical data and scaling to meet demand.
+
+## Improvements:
+
+- Better Testing
+    - Create a localstack instance /connection to do end-to-end database and service tests.
+    - Create more mock functions to test the function units
+    - Create a testing environment with AWS Organizations
+
+- Automate / implement manual creation of ecr and dynamodb with the ci/cd pipeline.
+- Integrate current CI/CD with Code Pipeline, Build and Deploy
+
 
 
 
