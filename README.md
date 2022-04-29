@@ -133,7 +133,7 @@ A scheduled scaling policy could be used if we know the demand based on usage pa
 
 ## API Reference
 
-#### Get all items
+#### Get all streams for ip target
 
 ```http
   GET /api/v1/streams
@@ -143,7 +143,7 @@ A scheduled scaling policy could be used if we know the demand based on usage pa
 | :-------- | :------- | :------------------------- |
 | `x-forwarded-for` | `string` | **Required**. The IPv4 Addres |
 
-#### Get item
+#### Add a new video stream record
 
 ```http
   POST /api/v1/stream
