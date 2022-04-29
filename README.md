@@ -94,7 +94,6 @@ Everytime we push a change, github actions will build and push a new image versi
 
 ## Scalabiliity Strategy:
 
-## Scalabiliity Strategy:
 
 The current architecture makes use of ECS with Fargate sitting behind an Application Load Balancer, with auto scaling policy and deployed to 3 availability zones. The ALB does its health checks to ensure the ecs cluster, service, and tasks are in good shape. We make use of an autoscaling step policy that keeps track of cpu utilization. When the CPU utilization is greater or equal to 85% an alarm will trigger in CloudWatch, this will increase the capacity by 1. As the CPU drops below 10% another CloudWatch Alarm will be triggered, this will scale down the capacity by 1.	
 
