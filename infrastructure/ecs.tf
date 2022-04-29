@@ -13,6 +13,7 @@ data "template_file" "myapp" {
     fargate_cpu    = var.fargate_cpu
     fargate_memory = var.fargate_memory
     aws_region     = var.aws_region
+    host_port      = var.host_port
   }
 }
 
@@ -41,7 +42,7 @@ resource "aws_ecs_service" "main" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.app.id
-    container_name   = "myVideoStreamMonitoringApp"
+    container_name   = "myapp"
     container_port   = var.app_port
   }
 

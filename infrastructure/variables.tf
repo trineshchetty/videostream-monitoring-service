@@ -41,6 +41,11 @@ variable "app_port" {
   default     = "3000"
 }
 
+variable "host_port" {
+  description = "Port exposed by the docker image to redirect traffic to"
+  default     = "80"
+}
+
 variable "app_count" {
   description = "Number of docker containers to run"
   default     = 3

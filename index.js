@@ -5,21 +5,19 @@ const compression = require("compression")
 
 const app = express()
 
-
-
-
-
-app.use(cors())
+app.use(cors({
+    "origin": "192.168.0.122"
+}))
 app.use(compression())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 
-app.get("/", (req, res) => res.send("OK").status(200))
+app.get("/", (req, res) => res.sendStatus(200))
 app.use("/api/v1", require("./routes/index"))
 
 const PORT = 3000
-app.listen(PORT, () => {
+app.listen(PORT, "192.168.0.110", () => {
 
     console.log(`Application Listening on PORT ${PORT}`)
 })
