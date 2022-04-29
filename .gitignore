@@ -3,7 +3,7 @@
 /infrastructure/*.tfstate
 /infrastructure/*.tfstate.backup
 /infrastructure/.terraform.tfstate.lock.info
-
+/infrastructure/terraform.plan/
 
 .env
 coverage/
