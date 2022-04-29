@@ -137,3 +137,11 @@ Monitoring the health of your instances, services and tasks is crucial to unders
 - video_playing
 - video_start_time
 - video_end_time
+
+### Environment File (.env)
+
+- PORT
+- dev_aws_profile
+- prod_aws_profile
+- DYNAMO_TABLE_NAME
+- HOST
