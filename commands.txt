@@ -1,0 +1,14 @@
+// create ecr repository
+. make.sh ecr-create [aws-profile]
+
+// create dynamodb table
+. make.sh dynamo-create [aws-profile]
+
+// initialized terraform:
+. make.sh tf-init
+
+// validate terraform
+. make.sh tf-validate
+
+// plan and apply terraform:
+. make.sh tf-apply

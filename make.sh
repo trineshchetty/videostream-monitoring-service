@@ -2,16 +2,14 @@
 
 
 # AWS variables
-AWS_PROFILE=dash
-AWS_REGION=af-south-1
+AWS_PROFILE=$2
+AWS_REGION="af-south-1"
+
 # project name
 PROJECT_NAME=video-stream-monitoring
 # Docker image name
 DOCKER_IMAGE=video-stream-monitoring
-# terraform
-export TF_VAR_project_name=$PROJECT_NAME
-export TF_VAR_region=$AWS_REGION
-export TF_VAR_profile=$AWS_PROFILE
+
 
 # the directory containing the script file
 dir="$(cd "$(dirname "$0")"; pwd)"
@@ -22,6 +20,7 @@ log()   { echo -e "\e[30;47m ${1^^} \e[0m ${@:2}"; }        # $1 uppercase backg
 info()  { echo -e "\e[48;5;28m ${1^^} \e[0m ${@:2}"; }      # $1 uppercase background green
 warn()  { echo -e "\e[48;5;202m ${1^^} \e[0m ${@:2}" >&2; } # $1 uppercase background orange
 error() { echo -e "\e[48;5;196m ${1^^} \e[0m ${@:2}" >&2; } # $1 uppercase background red
+
 
 ecr-create() {
     local repo=$(aws ecr describe-repositories \
@@ -41,8 +40,37 @@ ecr-create() {
     log REPOSITORY_URI $REPOSITORY_URI
 }
 
+dynamo-create() {
+    aws dynamodb create-table --cli-input-json file://src/config/dynamo.conf.json
+}
+
+tf-init() {
+    cd "$dir/infrastructure"
+    terraform init
+}
+
+tf-validate() {
+    cd "$dir/infrastructure"
+    terraform fmt -recursive
+	terraform validate
+}
+
+
+tf-apply() {
+    cd "$dir/infrastructure"
+	terraform plan \
+        -out=terraform.plan
+
+    terraform apply \
+        -auto-approve \
+        terraform.plan
+}
+
+
+
+
 # if `$1` is a function, execute it. Otherwise, print usage
 # compgen -A 'function' list all declared functions
 # https://stackoverflow.com/a/2627461
 FUNC=$(compgen -A 'function' | grep $1)
-[[ -n $FUNC ]] && { info execute $1; eval $1; } || usage;
+[[ -n $FUNC ]] && { info execute $1; eval $1; }
