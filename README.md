@@ -25,6 +25,10 @@ For local development you need to have the following installed:
 - Git
 - Jest global and local install
 
+
+### nodemon
+npm install -g nodemon
+
 # Next Steps
 
 - Clone repository
@@ -35,6 +39,7 @@ For local development you need to have the following installed:
 - Or Use AWS CLI:
     - aws configure
     - aws configure set region us-west-1 --profile integ
+
 
 ## Note
 Once AWS is configured you can run the commands found in commands.txt. This will create the ecr repository as well as dynamodb table. Ensure that you specify the aws-profile as the second command line argument.
