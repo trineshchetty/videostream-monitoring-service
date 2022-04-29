@@ -141,7 +141,7 @@ A scheduled scaling policy could be used if we know the demand based on usage pa
 
 | Header | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `x-forwarded-for` | `string` | **Required**. The IPv4 Addres |
+| `x-forwarded-for` | `string` | **Required**. The IPv4 Address |
 
 #### Add a new video stream record
 
@@ -151,7 +151,7 @@ A scheduled scaling policy could be used if we know the demand based on usage pa
 
 | Header | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `x-forwarded-for`      | `string` | **Required**. The IPv4 Addres |
+| `x-forwarded-for`      | `string` | **Required**. The IPv4 Address |
 
 #### Body (optional data)
 - video_name
