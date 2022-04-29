@@ -7,12 +7,15 @@ module.exports = function (service)
     {
         try
         {
+
             if (req.headers["x-forwarded-for"])
             {
                 await reqStreamsDto.validateAsync({
                     ip_addr: req.headers["x-forwarded-for"]
                 })
                 let response = await service.getStreamsForUserByIp(req.headers["x-forwarded-for"])
+
+        
 
                 res.json({
                     statusCode: 200,
@@ -42,6 +45,7 @@ module.exports = function (service)
     {
         try
         {
+            
             if (req.headers["x-forwarded-for"])
             {
                 const isValid = await videoStreamSchemaDto.validateAsync({
@@ -71,7 +75,7 @@ module.exports = function (service)
         }
         catch(error)
         {
-
+            // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", error)
             if (_.includes(error.toString(), "406"))
             {
                 const formatErrorResponse = error.toString().replace("Error: ", "")

@@ -8,13 +8,17 @@ const dynamodb = new aws.DynamoDB.DocumentClient({})
 
 module.exports = function streamMonitorService ()
 {
+
     async function createNewStreamForUser (streamData)
     {
         try
         {
-
+    
             if (process.env.DYNAMO_TABLE_NAME && process.env.DYNAMO_TABLE_NAME !== '')
             {
+
+       
+                
                 const streamsForOriginTarget = await getStreamsForUserByIp(streamData.ip_addr)
 
                 if (streamsForOriginTarget.Count <= 2)
@@ -27,6 +31,7 @@ module.exports = function streamMonitorService ()
                         ip_addr: streamData.ip_addr,
                         ...streamData
                     }
+                    
 
                     await videoStreamSchema.validateAsync(videoStreamItem)
 

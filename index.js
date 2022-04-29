@@ -1,23 +1,9 @@
-const express = require("express")
-const cors = require("cors")
-const compression = require("compression")
+const app = require("./server")
 
+const PORT = process.env.PORT || 3000
+const HOST = process.env.HOST || "localhost" 
 
-const app = express()
+app.listen(PORT, HOST, () => {
 
-app.use(cors({
-    "origin": "192.168.0.122"
-}))
-app.use(compression())
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
-
-
-app.get("/", (req, res) => res.sendStatus(200))
-app.use("/api/v1", require("./routes/index"))
-
-const PORT = 3000
-app.listen(PORT, "192.168.0.110", () => {
-
-    console.log(`Application Listening on PORT ${PORT}`)
+    console.log(`Application Listening on PORT ${PORT} on host/ipv4 ${HOST}`)
 })
