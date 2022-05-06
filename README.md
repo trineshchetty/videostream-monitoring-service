@@ -29,13 +29,7 @@ For local development you need to have the following installed:
 ### nodemon
 npm install -g nodemon
 
-### Environment File (.env)
 
-- PORT
-- dev_aws_profile
-- prod_aws_profile
-- DYNAMO_TABLE_NAME
-- HOST
 
 # Next Steps
 
@@ -47,6 +41,14 @@ npm install -g nodemon
 - Or Use AWS CLI:
     - aws configure
     - aws configure set region us-west-1 --profile integ
+
+### Environment File (.env)
+
+- PORT
+- dev_aws_profile
+- prod_aws_profile
+- DYNAMO_TABLE_NAME
+- HOST
 
 
 ## Note
